@@ -1,0 +1,25 @@
+- name: Create instance(s)
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    service_account_email: ansibletest@gadi-play.iam.gserviceaccount.com
+    pem_file: /home/gadi/MyCode/Ansible/pkey.pem
+    location: europe-west1-b
+    project_id: gadi-play
+    machine_type: n1-standard-1
+    image: centos-6
+
+  tasks:
+
+   - name: Launch instances
+     gce:
+         instance_names: testndible2
+         machine_type: "{{ machine_type }}"
+         image: "{{ image }}"
+         service_account_email: "{{ service_account_email }}"
+         pem_file: "{{ pem_file }}"
+         project_id: "{{ project_id }}"
+         zone: "{{ location }}"
+         
